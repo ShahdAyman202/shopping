@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { data } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'
  
-import { CartContext } from '../../Context/CartContext' // ✅ كده صح
+import { CartContext } from '../../Context/CartContext'  
 
 import toast from 'react-hot-toast'
 import { WishContext } from '../WishContext/WishContext'
@@ -101,7 +101,9 @@ console.log('error');
 ></i>
    </div>
       <button  className="bg-blue-950 hover:bg-pink-500 text-white font-medium rounded-lg text-sm 
-      px-5 py-2.5 text-center " onClick={()=>{addProdToCart(prod._id)}}>Add To Cart</button>
+      px-5 py-2.5 text-center " onClick={()=>{
+        console.log("Clicked product ID:", prod._id);
+        addProdToCart(prod._id)}}>Add To Cart</button>
     </div>
   </div>
  

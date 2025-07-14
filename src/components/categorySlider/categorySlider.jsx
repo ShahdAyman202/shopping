@@ -60,7 +60,7 @@ setcategory(data?.data)
     </h2>
   </div>
   <Slider {...settings}>
-    {category?.map((cate)=>{return <img src={cate?.image} className='h-[250px] md:h-[150px] ' alt={cate?.name} />})}
+    {category?.map((cate)=>{return <img key={cate.id} src={cate?.image} className='h-[250px] md:h-[150px] ' alt={cate?.name} />})}
   </Slider>
   </>
 }

@@ -16,13 +16,21 @@ export default function VerifyCode() {
     initialValues: { resetCode: '' },
     validationSchema,
     onSubmit: async (values) => {
-      try {
-        await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode`, values);
-        navigate('/resetpassword');  
-      } catch (error) {
-        setErrMsg(error.response?.data?.message);
-      }
-    },
+  const payload = {
+    resetCode: values.resetCode.trim(), // ✅ كده هنشيل المسافات
+  };
+
+  console.log("Sending:", payload);
+
+  try {
+    await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode`, payload);
+    navigate('/resetpassword');  
+  } catch (error) {
+    console.log("Error:", error.response?.data);
+    setErrMsg(error.response?.data?.message);
+  }
+}
+
   });
 
   return  <>
@@ -38,7 +46,7 @@ export default function VerifyCode() {
         <form onSubmit={formik.handleSubmit}  >
   <div className="grid gap-y-4">
     <div>
-      <label htmlFor="email" className="block text-sm font-bold ml-1 mb-2 text-blue-950">
+      <label htmlFor="resetCode" className="block text-sm font-bold ml-1 mb-2 text-blue-950">
         Enter Code:
       </label>
       <div className="relative">

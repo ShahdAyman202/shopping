@@ -9,28 +9,38 @@ import { createContext ,useState,useEffect } from "react";
  const [numOfCartItem, setnumOfCartItem] = useState(0)
  const [products, setproducts] = useState(null)
  let token=localStorage.getItem('userToken')
- let headers ={
-          token:localStorage.getItem('userToken')
-        }
+   let headers= {
+  token:  token ||''
+}
+
+
 function resetCart(params) {
   setcardId(null)
   setnumOfCartItem(0)
   setproducts(null)
   settotalPrice(0)
 }
-  async function addToCart(prodId) {
-  return axios.post(`https://ecommerce.routemisr.com/api/v1/cart`, {
-    productId: prodId
-  }, {
-    headers
-  }).then((response) => {
-     getUserCart()
-     return response
+async function addToCart(prodId) {
+  console.log('Adding to cart...', prodId);
+  console.log('Token:', localStorage.getItem('userToken'));
+
+  return axios.post(
+    `https://ecommerce.routemisr.com/api/v1/cart`,
+    { productId: prodId },
+    {
+       headers
+    }
+  ).then((response) => {
+    console.log('Add success:', response);
+    getUserCart();
+    return response;
   }).catch((error) => {
-    console.log(error);
-    return error.response; // ممكن ترجعي الخطأ كمان للتعامل معاه
+    console.log('❌ Add to cart error:', error?.response?.data);
+    return error.response;
   });
 }
+
+
 
  function getUserCart(params) {
     axios.get(`https://ecommerce.routemisr.com/api/v1/cart`,{
