@@ -1,5 +1,5 @@
 import React, { useState ,useEffect} from 'react'
-import style from './CategorySlider.module.css'
+ 
 import axios from 'axios'
 import Spinner from '../Spinner/Spinner'
 import Slider from 'react-slick';
